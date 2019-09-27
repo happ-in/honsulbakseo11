@@ -55,7 +55,7 @@ public class RegistActivity extends AppCompatActivity {
                 String repw = userREPW.getText().toString();
 
                 if(pw.compareTo(repw)==0){
-                    new JSONTask2().execute("http://192.168.0.2:3000/regist", id, pw);
+                    new JSONTask2().execute("http://192.168.0.3:3000/regist", id, pw);
                 } else{
                     String msg = "비밀번호가 일치하지 않습니다.";
                     Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
@@ -151,6 +151,16 @@ public class RegistActivity extends AppCompatActivity {
             }
 
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (s.compareTo("success")==0){
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
         }
     }
 }

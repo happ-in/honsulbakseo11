@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                 String pw = loginPW.getText().toString();
 
                 // JSONTask class 에서 (url, id, pw)로 받도록 했음
-                new JSONTask().execute("http://192.168.0.2:3000/login", id, pw);
+                new JSONTask().execute("http://192.168.0.3:3000/login", id, pw);
 
                 Log.v("Log ID :", id);
                 Log.v("Log PW :", pw);
@@ -157,21 +157,15 @@ public class LoginActivity extends AppCompatActivity {
 
             return null;
         }
-//
-//        @Override
-//        protected void onPostExecute(String s) {
-//            super.onPostExecute(s);
-//
-//            if (s.compareTo("success")==0){
-//                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                startActivity(intent);
-//            }
-//
-//            else{
-//                AlertDialog.Builder builder = new AlertDialog.Builder(LoginActivity.this);
-//                dialog = builder.setMessage("없는 아이디거나 비밀번호가 일치하지 않습니다.").setPositiveButton("확인", null).create();
-//                dialog.show();
-//            }
-//        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (s.compareTo("success")==0){
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        }
     }
 }

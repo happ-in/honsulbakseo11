@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="alchol">
+        <item>소주</item>
+        <item>맥주</item>
+        <item>보드카</item>
+        <item>데킬라</item>
+        <item>위스키</item>
+        <item>럼</item>
+        <item>레드와인</item>
+        <item>화이트와인</item>
+        <item>기타</item>
+    </string-array>
+</resources>
