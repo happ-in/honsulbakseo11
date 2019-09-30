@@ -26,15 +26,15 @@ import java.net.URL;
 
 public class RegistActivity extends AppCompatActivity {
 
-    EditText userID, userPW, userREPW;
+    EditText id, pw, userREPW;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist);
 
-        userID = (EditText)findViewById(R.id.regist_ID);
-        userPW = (EditText)findViewById(R.id.password);
+        id = (EditText)findViewById(R.id.regist_ID);
+        pw = (EditText)findViewById(R.id.password);
         userREPW = (EditText)findViewById(R.id.repassword);
 
         Button cancel_btn = (Button) findViewById(R.id.cancel);
@@ -50,12 +50,12 @@ public class RegistActivity extends AppCompatActivity {
         ok_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id = userID.getText().toString();
-                String pw = userPW.getText().toString();
+                String userID = id.getText().toString();
+                String userPW = pw.getText().toString();
                 String repw = userREPW.getText().toString();
 
-                if(pw.compareTo(repw)==0){
-                    new JSONTask2().execute("http://192.168.0.3:3000/regist", id, pw);
+                if(userPW.compareTo(repw)==0){
+                    new JSONTask2().execute("http://192.168.0.5:3000/regist", userID, userPW);
                 } else{
                     String msg = "비밀번호가 일치하지 않습니다.";
                     Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
@@ -72,6 +72,7 @@ public class RegistActivity extends AppCompatActivity {
                 jsonObject.accumulate("userID", args[1]);
                 jsonObject.accumulate("userPW", args[2]);
 
+                System.out.println(args.length);
                 HttpURLConnection conn = null;
                 BufferedReader reader = null;
                 try {
@@ -157,7 +158,7 @@ public class RegistActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (s.compareTo("success")==0){
+            if (s.compareTo("success_regist")==0){
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             }

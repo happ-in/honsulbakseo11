@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                 String pw = loginPW.getText().toString();
 
                 // JSONTask class 에서 (url, id, pw)로 받도록 했음
-                new JSONTask().execute("http://192.168.0.3:3000/login", id, pw);
+                new JSONTask().execute("http://192.168.0.5:3000/login", id, pw);
 
                 Log.v("Log ID :", id);
                 Log.v("Log PW :", pw);
@@ -162,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            if (s.compareTo("success")==0){
+            if (s.compareTo("success login")==0){
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }

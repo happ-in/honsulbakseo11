@@ -13,10 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
-
-import com.example.honsulbakseo.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -66,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 Fragment f = null;
                 int id = item.getItemId();
                 if(id == R.id.alchol){
-                    f = new AlcholBoardFragment();
+                    f = new RecipeBoardFragment();
                 }
 
                 if (f != null){

@@ -98,8 +98,8 @@ app.post('/login', function(req, res, next){
 
                                 else{
                                     console.log("Correct");
-                                    res.write("success", function(err){
-                                        console.log("success");
+                                    res.write("success_login", function(err){
+                                        console.log("success_login");
                                         res.end();
                                     });
                                 }
@@ -140,8 +140,8 @@ app.post('/regist', function (req, res, err) {
 
                       else{
                           console.log("Correct");
-                          res.write("success", function(err) {
-                              console.log("success");
+                          res.write("success_regist", function(err) {
+                              console.log("success_regist");
                               res.end();
                           });
                       }
@@ -149,6 +149,44 @@ app.post('/regist', function (req, res, err) {
                }
            })
        }
+    });
+});
+
+
+app.post('/recipe', function (req, res, err) {
+    var inputData;
+
+    req.on('data', function (data) {
+        inputData = JSON.parse(data);
+    });
+
+    req.on('end', function () {
+        var alchol_name = inputData.alchol_name;
+        var main_alchol = inputData.main_alchol;
+        var needs = inputData.needs;
+        var recipe = inputData.recipe;
+        var feature = inputData.feature;
+
+        conn.getConnection(function (err, connection) {
+            if (err) {
+                console.log("err : ", err);
+            } else {
+                connection.query('insert into recipe_write values(?,?,?,?,?)', [alchol_name, main_alchol, needs, recipe, feature], function (err, rows, fields) {
+                    if (err) {
+                        res.write("fail", function (err) {
+                            console.log("send fail");
+                            res.end();
+                        });
+                    } else {
+                        console.log("Correct");
+                        res.write("success_recipe", function (err) {
+                            console.log("success_recipe");
+                            res.end();
+                        });
+                    }
+                });
+            }
+        });
     });
 });
 
